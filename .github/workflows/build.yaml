@@ -151,7 +151,10 @@ jobs:
           {% endblock %}
 
           {% block horizon_footer %}
-          RUN /bin/cp -f /horizon-source/horizon/openstack_dashboard/api/neutron.py /var/lib/kolla/venv/lib64/python3.12/site-packages/openstack_dashboard/api/neutron.py
+          RUN /bin/cp -f /horizon-source/horizon/openstack_dashboard/api/neutron.py /var/lib/kolla/venv/lib64/python3.12/site-packages/openstack_dashboard/api/neutron.py && \
+              cd /var/lib/kolla/venv && \
+              python3 bin/manage.py collectstatic --clear --noinput && \
+              python3 bin/manage.py compress --force
           {% endblock %}
 
           EOF'
