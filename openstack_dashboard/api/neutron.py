@@ -192,7 +192,7 @@ class Port(NeutronAPIDictWrapper):
                 ON_STATE if apidict['mac_learning_enabled'] else OFF_STATE
         pairs = apidict.get('allowed_address_pairs')
         if pairs:
-            apidict = copy.deepcopy(apidict)
+            apidict = apidict.copy()
             wrapped_pairs = [PortAllowedAddressPair(pair) for pair in pairs]
             apidict['allowed_address_pairs'] = wrapped_pairs
         super().__init__(apidict)
